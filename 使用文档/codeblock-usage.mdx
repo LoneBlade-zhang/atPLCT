@@ -1,0 +1,528 @@
+---
+sidebar_position: 100
+sidebar_label: CodeBlock 使用指南
+---
+
+# CodeBlock 使用指南
+
+本文档介绍如何在 RuyiSDK 文档中使用增强的代码块功能。
+
+## 快速开始
+
+在 Markdown/MDX 文件中，直接使用三撇代码块并添加参数即可：
+
+````markdown
+```bash filename=test.sh copiable
+npm install
+npm start
+```
+````
+
+效果：
+
+```bash filename=test.sh copiable
+npm install
+npm start
+```
+
+---
+
+## 参数表格
+
+在三撇代码块的语言标识符后面，可以添加以下参数：
+
+| 参数名 | 格式 | 必需 | 默认值 | 说明 |
+|--------|------|------|--------|------|
+| 语言 | `bash` | ✅ | - | 编程语言，用于语法高亮 |
+| `filename` | `filename=xxx` | ❌ | - | 文件名，显示在顶部 |
+| `title` | `title="xxx"` 或 `title=xxx` | ❌ | - | 自定义标题 |
+| `copiable` | `copiable` | ❌ | `false` | 显示整体复制按钮 |
+| `input` | `input="1,3-5"` 或 `input=1,3-5` | ❌ | - | 输入行标记 |
+
+---
+
+## 基本语法
+
+### 格式说明
+
+````markdown
+```语言 参数1=值1 参数2=值2 参数3
+代码内容
+```
+````
+
+**注意事项**：
+- 语言标识符必须在最前面
+- 参数之间用空格分隔
+- 参数值如果包含空格，需要用引号包裹
+- 布尔参数（如 `copiable`）直接写参数名即可
+
+---
+
+## 参数详解
+
+### 1. 语言标识符（必需）
+
+**格式**：`bash`、`python`、`javascript` 等  
+**说明**：指定代码的编程语言，用于语法高亮
+
+**常用语言**：
+- `bash` / `shell` - Shell 脚本
+- `javascript` / `js` - JavaScript
+- `typescript` / `ts` - TypeScript
+- `python` / `py` - Python
+- `java` - Java
+- `cpp` / `c++` - C++
+- `go` - Go
+- `rust` - Rust
+- `json` - JSON
+- `yaml` - YAML
+
+**示例**：
+
+````markdown
+```python
+def hello():
+    print("Hello World")
+```
+````
+
+```python
+def hello():
+    print("Hello World")
+```
+
+---
+
+### 2. `filename` - 文件名
+
+**格式**：`filename=文件名`  
+**说明**：在代码块顶部显示文件名
+
+**示例**：
+
+````markdown
+```javascript filename=app.js
+import express from 'express';
+
+const app = express();
+app.listen(3000);
+```
+````
+
+```javascript filename=app.js
+import express from 'express';
+
+const app = express();
+app.listen(3000);
+```
+
+---
+
+### 3. `title` - 自定义标题
+
+**格式**：
+- 不含空格：`title=安装依赖`
+- 包含空格：`title="安装依赖"`
+
+**说明**：自定义代码块顶部标题
+
+**示例**：
+
+````markdown
+```bash title="安装依赖"
+npm install react react-dom
+```
+````
+
+```bash title="安装依赖"
+npm install react react-dom
+```
+
+---
+
+### 4. `copiable` - 整体复制按钮
+
+**格式**：`copiable`  
+**说明**：在右上角显示复制整个代码块的按钮
+
+**示例**：
+
+````markdown
+```python copiable
+def greet(name):
+    return f"Hello, {name}!"
+```
+````
+
+```python copiable
+def greet(name):
+    return f"Hello, {name}!"
+```
+
+---
+
+### 5. `input` - 输入行标记 ⭐
+
+**格式**：
+- 不含空格：`input=1,3-5,7`
+- 包含空格（更清晰）：`input="1, 3-5, 7"`
+
+**说明**：指定哪些行是输入行（命令行），支持单行和范围
+
+**语法规则**：
+- 单行：`1`, `2`, `5`
+- 多行：`1,3,5`（逗号分隔）
+- 范围：`1-5`（连字符表示范围）
+- 组合：`1,3-5,7`（可以混合使用）
+
+**注意**：行号从 1 开始计数
+
+#### 示例 1：单个输入行
+
+````markdown
+```bash input="1"
+$ ls -la
+total 48
+drwxr-xr-x  5 user  staff   160 Nov 11 10:00 .
+```
+````
+
+```bash input="1"
+$ ls -la
+total 48
+drwxr-xr-x  5 user  staff   160 Nov 11 10:00 .
+```
+
+#### 示例 2：多个输入行
+
+````markdown
+```bash input="1,3,5"
+$ cd /tmp
+/tmp
+$ ls
+file1.txt  file2.txt
+$ pwd
+/tmp
+```
+````
+
+```bash input="1,3,5"
+$ cd /tmp
+/tmp
+$ ls
+file1.txt  file2.txt
+$ pwd
+/tmp
+```
+
+#### 示例 3：范围指定
+
+````markdown
+```bash input="1-3"
+$ npm install
+added 245 packages in 12s
+$ npm run build
+> build
+> next build
+```
+````
+
+```bash input="1-3"
+$ npm install
+added 245 packages in 12s
+$ npm run build
+> build
+> next build
+```
+
+#### 输入行特性
+
+✨ **输入行（标记的行）**：
+- ✅ 灰色背景高亮
+- ✅ 保留语法高亮
+- ✅ 悬停显示行级复制按钮
+- ✅ 复制时自动去除 PS1 提示符（`$` 及之前的内容）
+
+📄 **输出行（未标记的行）**：
+- ⚪ 无背景色
+- ⚪ 灰色文本（无语法高亮）
+- ⚪ 无复制按钮
+
+---
+
+## 组合使用
+
+### 示例 1：Shell 命令 + 文件名 + 输入行标记
+
+````markdown
+```bash filename=setup.sh input="1,3,5"
+$ cd /opt/ruyisdk
+/opt/ruyisdk
+$ ./configure
+checking for gcc... gcc
+checking whether the C compiler works... yes
+$ make
+Building...
+Done
+```
+````
+
+```bash filename=setup.sh input="1,3,5"
+$ cd /opt/ruyisdk
+/opt/ruyisdk
+$ ./configure
+checking for gcc... gcc
+checking whether the C compiler works... yes
+$ make
+Building...
+Done
+```
+
+---
+
+### 示例 2：代码文件 + 可复制
+
+````markdown
+```python filename=hello.py copiable
+#!/usr/bin/env python3
+
+def main():
+    print("Hello, RuyiSDK!")
+    
+if __name__ == "__main__":
+    main()
+```
+````
+
+```python filename=hello.py copiable
+#!/usr/bin/env python3
+
+def main():
+    print("Hello, RuyiSDK!")
+    
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+### 示例 3：自定义标题 + 输入行
+
+````markdown
+```bash title="常见错误及解决方法" input="1,3"
+$ ruyi update
+Error: Network connection failed
+
+$ ruyi update --proxy=http://proxy.example.com:8080
+Update successful
+```
+````
+
+```bash title="常见错误及解决方法" input="1,3"
+$ ruyi update
+Error: Network connection failed
+
+$ ruyi update --proxy=http://proxy.example.com:8080
+Update successful
+```
+
+---
+
+## 常见用例
+
+### 用例 1：安装命令
+
+````markdown
+```bash input="1"
+$ ruyi install gcc-riscv64
+Installing gcc-riscv64...
+Downloading packages...
+[████████████████████████] 100%
+Installation completed successfully!
+```
+````
+
+```bash input="1"
+$ ruyi install gcc-riscv64
+Installing gcc-riscv64...
+Downloading packages...
+[████████████████████████] 100%
+Installation completed successfully!
+```
+
+---
+
+### 用例 2：配置文件
+
+````markdown
+```json filename=package.json copiable
+{
+  "name": "ruyisdk-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.0.0"
+  }
+}
+```
+````
+
+```json filename=package.json copiable
+{
+  "name": "ruyisdk-app",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.0.0"
+  }
+}
+```
+
+---
+
+### 用例 3：多命令脚本
+
+````markdown
+```bash filename=deploy.sh input="1,4,7"
+$ docker build -t myapp .
+Building image...
+Successfully built
+
+$ docker tag myapp:latest myapp:v1.0.0
+Successfully tagged
+
+$ docker push myapp:v1.0.0
+Pushing to registry...
+Done
+```
+````
+
+```bash filename=deploy.sh input="1,4,7"
+$ docker build -t myapp .
+Building image...
+Successfully built
+
+$ docker tag myapp:latest myapp:v1.0.0
+Successfully tagged
+
+$ docker push myapp:v1.0.0
+Pushing to registry...
+Done
+```
+
+---
+
+## 注意事项
+
+### ✅ 推荐做法
+
+1. **使用 `input` 区分命令和输出**
+   ```bash input="1"
+   $ command here
+   output here
+   ```
+
+2. **为代码文件添加 `filename`**
+   ```python filename=main.py
+   code here
+   ```
+
+3. **为复杂代码添加 `copiable`**
+   ```javascript copiable
+   long code here
+   ```
+
+4. **参数值含空格时使用引号**
+   ```bash title="My Title" input="1, 3-5"
+   code here
+   ```
+
+### ❌ 常见错误
+
+1. **参数顺序错误**
+   ```
+   ❌ filename=test.sh bash
+   ✅ bash filename=test.sh
+   ```
+
+2. **忘记引号**
+   ```
+   ❌ title=My Title (有空格但没引号)
+   ✅ title="My Title"
+   ```
+
+3. **行号从 0 开始**
+   ```
+   ❌ input="0,2,4" (行号从0开始)
+   ✅ input="1,3,5" (行号从1开始)
+   ```
+
+4. **input 参数含空格但没引号**
+   ```
+   ❌ input=1, 3-5, 7
+   ✅ input="1, 3-5, 7" 或 input=1,3-5,7
+   ```
+
+---
+
+## 语言值参考
+
+| 语言 | 可用值 | 示例 |
+|------|--------|------|
+| Bash/Shell | `bash`, `shell`, `sh`, `zsh` | ````bash```` |
+| JavaScript | `javascript`, `js` | ````javascript```` |
+| TypeScript | `typescript`, `ts` | ````typescript```` |
+| Python | `python`, `py` | ````python```` |
+| Java | `java` | ````java```` |
+| C | `c` | ````c```` |
+| C++ | `cpp`, `c++` | ````cpp```` |
+| Go | `go` | ````go```` |
+| Rust | `rust`, `rs` | ````rust```` |
+| JSON | `json` | ````json```` |
+| YAML | `yaml`, `yml` | ````yaml```` |
+| XML | `xml` | ````xml```` |
+| HTML | `html` | ````html```` |
+| CSS | `css` | ````css```` |
+| Markdown | `markdown`, `md` | ````markdown```` |
+
+---
+
+## 总结
+
+### 参数速查表
+
+| 参数 | 示例 | 说明 |
+|------|------|------|
+| 语言 | `bash` | 必需，语法高亮 |
+| `filename` | `filename=app.js` | 显示文件名 |
+| `title` | `title="My Title"` | 自定义标题 |
+| `copiable` | `copiable` | 显示复制按钮 |
+| `input` | `input="1,3-5"` | 标记输入行 |
+
+### 快速模板
+
+**Shell 命令**：
+````markdown
+```bash input="1"
+$ command
+output
+```
+````
+
+**代码文件**：
+````markdown
+```language filename=file.ext copiable
+code here
+```
+````
+
+**完整示例**：
+````markdown
+```bash filename=script.sh title="My Script" input="1,3" copiable
+$ command1
+output1
+$ command2
+output2
+```
+````
+
+使用这些参数，让你的代码示例更清晰、更易用！🎉
