@@ -1,4 +1,4 @@
-# December 2025
+# November 2025
 
 ### Pull #278 [ruyisdk/ruyisdk-website#278](https://github.com/ruyisdk/ruyisdk-website/pull/278)
 - Code block v2：Added a button for copying each line and a background highlight effect
