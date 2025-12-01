@@ -11,6 +11,7 @@
 - Docs web v3:optimzed the docs web's font and layout 
     - remove the sidebar
     - change the style of font
+    - change the style of the navigation bar
 
 ### Pull #287 [ruyisdk/ruyisdk-website#287](https://github.com/ruyisdk/ruyisdk-website/pull/287)
 - Ensure all lines display as block to preserve line breaks  
