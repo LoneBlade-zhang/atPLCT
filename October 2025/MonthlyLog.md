@@ -6,7 +6,6 @@
 ### Pull #256 [ruyisdk/ruyisdk-website#256](https://github.com/ruyisdk/ruyisdk-website/pull/256)
 - Update news on homepage 
 
-
 ### Pull #257 [ruyisdk/ruyisdk-website#257](https://github.com/ruyisdk/ruyisdk-website/pull/257)
 - Delete statiticalPage's slider on mobile 
 
