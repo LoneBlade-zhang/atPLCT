@@ -25,3 +25,6 @@
 ### Pull #296 [ruyisdk/ruyisdk-website#296](https://github.com/ruyisdk/ruyisdk-website/pull/296)
 - modify the layout of navbar
 
+### Pull #294 [ruyisdk/ruyisdk-website#294](https://github.com/ruyisdk/ruyisdk-website/pull/294)
+- Code block v3: Fixed the code highlighting issue and removed the filename attribute.
+
